@@ -5,59 +5,160 @@
   padding: 0;
 }
 
+/* —— L’Oréal-inspired palette —— */
+:root {
+  --brand-red: #e60012;
+  --brand-black: #171717;
+  --brand-white: #ffffff;
+  --warm-gray: #f7f6f4;
+  --muted-gray: #66625f;
+  --border-gray: #e5e1dd;
+}
+
 /* —— body + fonts —— */
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  color: var(--brand-black);
   display: flex;
   justify-content: center;
+  min-height: 100vh;
+  background: var(--warm-gray);
 }
 
 .page-wrapper {
   width: 90%;
   max-width: 900px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* header */
 .site-header {
-  text-align: center;
-  padding-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 42px 0 30px;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.brand-logo {
+  display: block;
+  width: 180px;
+  height: auto;
+}
+
+.header-copy {
+  padding-left: 28px;
+  border-left: 1px solid var(--border-gray);
+}
+
+.header-eyebrow {
+  margin-bottom: 6px;
+  color: var(--brand-red);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .site-title {
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  font-weight: 400;
 }
 
 /* chat window */
 .chatbox {
-  margin: 40px 0;
+  margin: 36px 0;
+  padding: 24px;
+  border-top: 4px solid var(--brand-red);
+  border-radius: 4px;
+  background: var(--brand-white);
+  box-shadow: 0 12px 32px rgb(23 23 23 / 7%);
 }
 
 .chat-window {
   height: 360px;
-  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid var(--border-gray);
+  border-radius: 2px;
   padding: 20px;
   font-size: 18px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #fafafa;
+  background: var(--warm-gray);
   white-space: pre-line;
 }
 
 /* messages */
 .msg {
-  margin-bottom: 14px;
+  max-width: 80%;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 16px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .msg.user {
-  color: #000;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  background: var(--brand-red);
+  color: var(--brand-white);
 }
 
 .msg.ai {
-  color: #666666;
+  align-self: flex-start;
+  border: 1px solid var(--border-gray);
+  border-bottom-left-radius: 4px;
+  background: var(--brand-white);
+  color: var(--muted-gray);
+}
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: typing-bounce 1.2s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typing-bounce {
+  0%,
+  60%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-dot {
+    animation: none;
+  }
 }
 
 /* input row */
@@ -70,20 +171,23 @@ body {
 .chat-form input {
   flex: 1;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-gray);
+  border-radius: 2px;
   font-size: 18px;
+  font-family: inherit;
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
+  outline: 2px solid var(--brand-red);
   outline-offset: 2px;
 }
 
 .chat-form button {
   font-size: 18px;
-  background: #000;
-  color: #fff;
+  background: var(--brand-red);
+  color: var(--brand-white);
   border: none;
+  border-radius: 2px;
   padding: 12px;
   width: 48px;
   height: 48px;
@@ -99,11 +203,11 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: #b8000e;
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
+  outline: 2px solid var(--brand-black);
   outline-offset: 2px;
 }
 
@@ -122,10 +226,12 @@ body {
 
 /* footer */
 .site-footer {
-  margin: 60px 0 40px;
+  margin: auto 0 0;
+  padding: 24px 0 32px;
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: var(--muted-gray);
+  border-top: 1px solid var(--border-gray);
 }
 
 .site-footer nav {
@@ -134,10 +240,53 @@ body {
 
 .site-footer a {
   margin: 0 8px;
-  color: #000;
+  color: var(--brand-black);
   text-decoration: none;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: var(--brand-red);
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    gap: 18px;
+    padding: 30px 0 24px;
+    text-align: center;
+  }
+
+  .brand-logo {
+    width: 160px;
+  }
+
+  .header-copy {
+    padding: 0;
+    border-left: 0;
+  }
+
+  .site-title {
+    font-size: 22px;
+  }
+
+  .chatbox {
+    margin: 24px 0;
+    padding: 16px;
+  }
+
+  .chat-window {
+    height: 55vh;
+    min-height: 260px;
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .chat-form {
+    gap: 8px;
+  }
+
+  .chat-form input {
+    min-width: 0;
+    font-size: 16px;
+  }
 }
